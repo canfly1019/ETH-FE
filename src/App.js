@@ -12,13 +12,23 @@ function App() {
   const connectWallet = async () => {
     if (window && window.ethereum) {
       try {
-          console.log(ethers.providers);
+        if (!connectedAccount) {
           providerRef.current = new ethers.providers.Web3Provider(window.ethereum);
           console.log(providerRef.current);
-          await providerRef.current.send("eth_requestAccounts", []);
+          const accounts = await providerRef.current.send("eth_requestAccounts", []);
           signerRef.current = providerRef.current.getSigner();
-      } catch (error) {
-          setError(error.message);
+          console.log(accounts);
+
+          setConnectedAccount(accounts[0]);
+        }
+        else {
+          setConnectedAccount("");
+          setError("");
+          signerRef.current = null;
+          providerRef.current = null;
+        }
+      } catch (err) {
+          setError(err.message);
       }
     } else {
         alert("please install MetaMask");
@@ -26,6 +36,10 @@ function App() {
   }
 
   const callContract = async (isLong) => {
+    if (!connectedAccount) {
+      setError("Please connect to a wallet first.");
+      return;
+    }
     const signer = signerRef.current;
     const provider = providerRef.current;
     const contract = new ethers.Contract(contractAddress, abi, provider);
@@ -49,9 +63,10 @@ function App() {
 
   return (
     <div>
-      <button onClick={handleConnect}>{connectedAccount ? 'Connected' : 'Connect'}</button>
+      <button onClick={handleConnect}>{connectedAccount ? `${connectedAccount}` : 'Connect Wallet' }</button>
       <button onClick={handleLong}>Long</button>
       <button onClick={handleShort}>Short</button>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
     </div>
   );
 }
