@@ -83,11 +83,10 @@ function App() {
             Lower
           </button>
         </div>
-      </div>
-
-      <div className="footer">
-        &copy; 2024 Furacle GamETH. All rights reserved.
-      </div>
+        <div className="footer">
+          &copy; 2024 Furacle GamETH. All rights reserved.
+        </div>
+      </div>     
     </div>
 
   );

@@ -1,6 +1,8 @@
 .App {
   width: 100%;
-  height: 100%;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .App-logo {
@@ -37,17 +39,19 @@
   }
 }
 
-body {
+.body {
   display: flex;
-  flex-direction: column; /* flex-col 对应的布局方向，表示子元素垂直排列 */
-  align-items: center; /* items-center 对应在交叉轴上的居中对齐 */
-  justify-content: center; /* justify-center 对应在主轴上的居中对齐 */
-  gap: 1rem; /* space-y-4 对应的间距，但需注意兼容性 */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   margin-top: 200px;
 }
+
 .btn {
   transition: background-color 0.3s, box-shadow 0.3s;
 }
+
 .btn:hover {
   background-color: #e2e8f0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -58,102 +62,101 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
   margin-bottom: 2.5rem;
 }
 
-@media (min-width: 640px) { /* 对应sm: */
+@media (min-width: 640px) {
   .head {
-    padding-left: 1.5rem; /* sm:px-6 */
-    padding-right: 1.5rem; /* 同上 */
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
-@media (min-width: 1024px) { /* 对应lg: */
+@media (min-width: 1024px) {
   .head {
-    padding-left: 2rem; /* lg:px-8 */
-    padding-right: 2rem; /* 同上 */
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
 .title {
-  font-size: 2.25rem; /* text-4xl 对应的字体大小，约等于36px */
-  font-weight: bold; /* font-bold 对应的字体粗细 */
-  color: #2563eb; /* text-blue-600 对应的颜色，这是Tailwind CSS默认蓝色阶级之一 */
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2563eb;
 }
 
 .footer {
-  text-align: center; /* text-center 对应的文本居中对齐 */
+  text-align: center;
   justify-content: center;
-  font-size: 0.875rem; /* text-sm 对应的字体大小，大约等于14px */
-  color: #6b7280; /* text-gray-500 对应的颜色，这是一个中等灰色 */
-  width: 100%; /* w-full 对应的宽度，表示元素宽度为100% */
-  padding-left: 1rem; /* px-4 对应的左右内边距 */
-  padding-right: 1rem; /* 同上 */
-  margin-top: 90%;
+  font-size: 0.875rem;
+  color: #6b7280;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-@media (min-width: 640px) { /* 对应sm: */
+@media (min-width: 640px) {
   .footer {
-    padding-left: 1.5rem; /* sm:px-6 */
-    padding-right: 1.5rem; /* 同上 */
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
-@media (min-width: 1024px) { /* 对应lg: */
+@media (min-width: 1024px) {
   .footer {
-    padding-left: 2rem; /* lg:px-8 */
-    padding-right: 2rem; /* 同上 */
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
 .button {
-  padding-left: 2rem; /* px-8 对应的左右内边距 */
-  padding-right: 2rem; /* 同上 */
-  padding-top: 1rem; /* py-4 对应的上下内边距 */
-  padding-bottom: 1rem; /* 同上 */
-  border: 1px solid #3b82f6; /* border-blue-500 对应的边框颜色 */
-  color: #3b82f6; /* text-blue-500 对应的文本颜色 */
-  border-radius: 0.5rem; /* rounded-lg 对应的边框圆角 */
-  font-weight: 500; /* font-medium 对应的字体粗细 */
-  font-size: 1.125rem; /* text-lg 对应的字体大小，约等于18px */
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border: 1px solid #3b82f6;
+  color: #3b82f6;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 1.125rem;
 }
 
 .connectButton {
-  padding-left: 1.5rem; /* px-6 对应的左右内边距 */
+  font-size: 3rem;
+  align-items: center;
+  padding-left: 1.5rem;
   padding-right: 1.5rem;
-  padding-top: 0.5rem; /* py-2 对应的上下内边距 */
+  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  border: 1px solid #3b82f6; /* border 和 border-blue-500 对应的边框样式和颜色 */
-  color: #3b82f6; /* text-blue-500 对应的文本颜色 */
-  border-radius: 0.5rem; /* rounded-lg 对应的边框圆角 */
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* 过渡效果 */
+  border: 1px solid #3b82f6;
+  color: #3b82f6;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .connectButton:hover {
-  background-color: #3b82f6; /* hover:bg-blue-500 对应的背景颜色 */
-  color: #ffffff; /* hover:text-white 对应的文本颜色 */
+  background-color: #3b82f6;
+  color: #ffffff;
 }
 
 .connectButton:focus {
-  outline: none; /* focus:outline-none 移除焦点时的轮廓 */
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* focus:ring 和 focus:ring-blue-500 focus:ring-opacity-50 对应的阴影效果 */
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
 }
 
 .btnFlex {
   justify-content: center;
-  display: flex; /* flex 对应的布局显示 */
-  gap: 1rem; /* space-x-4 对应的水平间距，1rem大约等于16px，但具体值取决于Tailwind配置 */
+  display: flex;
+  gap: 1rem;
 }
 
 .line1 {
   text-align: center;
-  font-size: 1.5rem; /* text-2xl 对应的字体大小，大约等于24px */
-  font-weight: 600; /* font-semibold 对应的字体粗细 */
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .line2 {
   text-align: center;
-  font-size: 1.125rem; /* text-lg 对应的字体大小，大约等于18px */
+  font-size: 1.125rem;
 }
