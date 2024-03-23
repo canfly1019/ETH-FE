@@ -1,6 +1,7 @@
 import React, { useState , useEffect, useRef } from 'react'
 import { ethers } from 'ethers';
 import { abi, contractAddress } from './constants.js';
+import './App.css'; 
 
 function App() {
   const [connectedAccount, setConnectedAccount] = useState(false);
@@ -46,7 +47,8 @@ function App() {
     console.log(contract);
     const contractCtx = contract.connect(signer);
     console.log("contractCtx", contractCtx);
-    await contractCtx.enterPriceGuess(isLong, {value: ethers.utils.parseEther("0.01")});
+    const result = await contractCtx.enterPriceGuess(isLong, {value: ethers.utils.parseEther("0.01")});
+    console.log("result", result);
 }
 
   const handleConnect = async () => {
@@ -62,12 +64,32 @@ function App() {
   }
 
   return (
-    <div>
-      <button onClick={handleConnect}>{connectedAccount ? `${connectedAccount}` : 'Connect Wallet' }</button>
-      <button onClick={handleLong}>Long</button>
-      <button onClick={handleShort}>Short</button>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+    <div className="App">
+      <div className="head">
+        <h1 className="title">FURACLE GAMETH</h1>
+        <button onClick={handleConnect} className="connectButton">
+          {connectedAccount ? `${connectedAccount.substring(0, 6)}...` : 'Connect Wallet'}
+        </button>
+      </div>
+
+      <div className="body">
+        <h2 className="line1">Guess tomorrow's ETH price at noon!</h2>
+        <p className="line2">Will it be higher or lower than at midnight?</p>
+        <div className="btnFlex">
+          <button onClick={handleLong} className="button">
+            Higher
+          </button>
+          <button onClick={handleShort} className="button">
+            Lower
+          </button>
+        </div>
+      </div>
+
+      <div className="footer">
+        &copy; 2024 Furacle GamETH. All rights reserved.
+      </div>
     </div>
+
   );
 }
 
