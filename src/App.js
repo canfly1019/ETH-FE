@@ -1,4 +1,4 @@
-import React, { useState , useEffect, useRef } from 'react'
+import React, { useState , useRef } from 'react'
 import { ethers } from 'ethers';
 import { abi, contractAddress } from './constants.js';
 import './App.css'; 
@@ -8,18 +8,14 @@ function App() {
   const [error, setError] = useState("");
   const signerRef = useRef(null);
   const providerRef = useRef(null);
-  const web3 = useRef(null);
 
   const connectWallet = async () => {
     if (window && window.ethereum) {
       try {
         if (!connectedAccount) {
           providerRef.current = new ethers.providers.Web3Provider(window.ethereum);
-          console.log(providerRef.current);
           const accounts = await providerRef.current.send("eth_requestAccounts", []);
           signerRef.current = providerRef.current.getSigner();
-          console.log(accounts);
-
           setConnectedAccount(accounts[0]);
         }
         else {
@@ -43,13 +39,27 @@ function App() {
     }
     const signer = signerRef.current;
     const provider = providerRef.current;
-    const contract = new ethers.Contract(contractAddress, abi, provider);
-    console.log(contract);
-    const contractCtx = contract.connect(signer);
-    console.log("contractCtx", contractCtx);
-    const result = await contractCtx.enterPriceGuess(isLong, {value: ethers.utils.parseEther("0.01")});
-    console.log("result", result);
-}
+    try {
+      const contract = new ethers.Contract(contractAddress, abi, provider);
+      const contractCtx = contract.connect(signer);
+      const result = await contractCtx.enterPriceGuess(isLong, {value: ethers.utils.parseEther("0.01")});
+      alert("You joined the game sucessfully!");
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  function extractFirstSentence(errorMessage) {
+    const periodIndex = error.indexOf('.');
+    
+    if (periodIndex !== -1) {
+      return error.substring(0, periodIndex + 1);
+    } else {
+      return error;
+    }
+  }
+
+  const firstSentence = extractFirstSentence(error);
 
   const handleConnect = async () => {
     await connectWallet();
@@ -66,7 +76,8 @@ function App() {
   return (
     <div className="App">
       <div className="head">
-        <h1 className="title">FURACLE GAMETH</h1>
+        <img className="img" src={process.env.PUBLIC_URL + '/logo.jpg'} alt="logo" />
+        <p className="title">FURACLE GAMETH</p>
         <button onClick={handleConnect} className="connectButton">
           {connectedAccount ? `${connectedAccount.substring(0, 6)}...` : 'Connect Wallet'}
         </button>
@@ -84,7 +95,7 @@ function App() {
           </button>
         </div>
         <div className="footer">
-          &copy; 2024 Furacle GamETH. All rights reserved.
+          {error && <div className="err">{error}</div>}
         </div>
       </div>     
     </div>
